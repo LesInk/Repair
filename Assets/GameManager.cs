@@ -68,7 +68,7 @@ Debug.Log("Starting with State " + Music.BongCount);
                     break;
                 case 1:
                     TextStatus.text = "Breath In";
-TextStatus.text = "Thank you\nProgramming - Lysle Shields\n3D Art - Jessica Cookson\n3D Art Assistance - Madeline Shields";
+//TextStatus.text = "Thank you\nProgramming - Lysle Shields\nMusic - Crispin Avila\n3D Art - Jessica Cookson\n3D Art Assistance - Madeline Shields";
                     break;
                 case 2:
                     TextStatus.text = "Breath Out";
@@ -211,7 +211,7 @@ TextStatus.text = "Thank you\nProgramming - Lysle Shields\n3D Art - Jessica Cook
                     TextStatus.text = "... peace ...";
                     break;
                 case 36:
-                    TextStatus.text = "Thank you\nProgramming - Lysle Shields\n3D Art - Jessica Cookson\n3D Art Assistance - Madeline Shields";
+                    TextStatus.text = "Thank you\nProgramming - Lysle Shields\nMusic - Crispin Avila\n3D Art - Jessica Cookson\n3D Art Assistance - Madeline Shields";
                     break;
                 default:
                     TextStatus.text = "---";
