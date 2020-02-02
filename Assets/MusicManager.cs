@@ -8,7 +8,7 @@ public class MusicManager : MonoBehaviour
     private float NextBongSound;
     private float FirstBongSound = 13.759f;
     private float BongInterval = 6.8865f/1.0f;
-    private int BongCount;
+    public int BongCount;
 
     // Start is called before the first frame update
     void Start()
@@ -18,10 +18,32 @@ public class MusicManager : MonoBehaviour
         BongCount = -1;
     }
 
+    public void SkipTo(float TimeInMusic)
+    {
+        if (TimeInMusic < FirstBongSound)
+        {
+            BongCount = 0;
+            NextBongSound = FirstBongSound;
+        }
+        else
+        {
+            NextBongSound = FirstBongSound;
+            while (NextBongSound <= TimeInMusic)
+            {
+                BongCount++;
+                NextBongSound += BongInterval;
+            }
+        }
+        // Now skip to the song position
+        Audio.time = TimeInMusic;
+    }
+
+
     public void StartMusic()
     {
         Audio.Play();
         Debug.Log("Music started");
+//SkipTo(30.0f);
     }
 
     public bool UpdateMusic(bool IsTouching, bool IsDoneAllPoints)
@@ -38,7 +60,7 @@ public class MusicManager : MonoBehaviour
                 NextBongSound += BongInterval;
                 BongCount++;
                 DoNext = true;
-Debug.Log("BongCount: " + BongCount);
+//Debug.Log("BongCount: " + BongCount);
             }
             else
             {

@@ -81,4 +81,10 @@ public class TouchPoints : MonoBehaviour
         ActivePair++;
         UpdateActives();
     }
+
+    public void DoIndex(int Index)
+    {
+        ActivePair = Index;
+        UpdateActives();
+    }
 }

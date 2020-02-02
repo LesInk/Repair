@@ -65,6 +65,7 @@
     <Compile Include="Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\About\Scripts\Readme.cs" />
     <Compile Include="Assets\Focus.cs" />
     <Compile Include="Assets\GameManager.cs" />
+    <Compile Include="Assets\Mover.cs" />
     <Compile Include="Assets\MusicManager.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
@@ -547,6 +548,7 @@
     <Compile Include="Assets\UniGLTF\UniJSON\Scripts\MsgPack\MsgPackValue.cs" />
     <Compile Include="Assets\UniGLTF\UniJSON\Scripts\StringSegment.cs" />
     <Compile Include="Assets\UniGLTF\UniUnlit\Scripts\Utils.cs" />
+    <Compile Include="Assets\WindowFader.cs" />
     <None Include="Assets\Ciconia Studio\Shaders\Double Sided Shaders\Double Sided Transparent Diffuse Bump.shader" />
     <None Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Shaders\XingLightShader.shader" />
     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarMaterialStateShader.cginc" />
