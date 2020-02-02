@@ -49,7 +49,17 @@ public class Mover : MonoBehaviour
         float t = Mathf.SmoothStep(0, 1.0f, TimeMoved / TimeToMove);
         transform.rotation = Quaternion.Lerp(StartRotation, End.rotation, t);
         transform.position = Vector3.Lerp(StartPosition, End.position, t);
-        transform.localScale = Vector3.Lerp(StartScale, End.localScale, t);
+        Vector3 NewScale = Vector3.Lerp(StartScale, End.localScale, t);
+        if (NewScale.magnitude >= 0.001f)
+        {
+            transform.localScale = NewScale;
+        }
+        else
+        {
+            // Else turn off
+            gameObject.SetActive(false);
+        }
+
 
         if (!DoMove)
         {
