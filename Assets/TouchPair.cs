@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TouchPair : MonoBehaviour
 {
-    private TouchPoint[] Pair;
+    public TouchPoint[] Pair;
+    private Focus FocusLeft;
+    private Focus FocusRight;
+    private bool DoFocus;
 
     // Start is called before the first frame update
     void Start()
@@ -12,11 +16,11 @@ public class TouchPair : MonoBehaviour
         Pair = GetComponentsInChildren<TouchPoint>();
     }
 
-    public void SetPreviewMode(bool IsPreview)
+    public void SetOldMode(bool IsOld)
     {
         foreach(TouchPoint TP in Pair)
         {
-            TP.SetPreviewMode(IsPreview);
+            TP.SetOldMode(IsOld);
         }
     }
 
@@ -32,5 +36,25 @@ public class TouchPair : MonoBehaviour
         }
 
         return Touched;
+    }
+
+    public void MoveFocus(Focus focusR, Focus focusL)
+    {
+        FocusLeft = focusL;
+        FocusRight = focusR;
+        DoFocus = true;
+    }
+
+    private void Update()
+    {
+        if (DoFocus)
+        {
+            if ((Pair[0].gameObject.transform != null) && (Pair[1].gameObject.transform != null))
+            {
+                FocusRight.GoTo(Pair[0].gameObject.transform.position);
+                FocusLeft.GoTo(Pair[1].gameObject.transform.position);
+                DoFocus = false;
+            }
+        }
     }
 }

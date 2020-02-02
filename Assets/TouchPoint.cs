@@ -7,25 +7,44 @@ public class TouchPoint : MonoBehaviour
     public Transform Toucher;
     private float GoalDistance = 0.1f;
     private MeshRenderer Renderer;
+
     private Color OriginalColor;
     private Color OriginalEmission;
-    private Color NoEmission;
-    private Color HighlightColor;
-    private bool IsPreviewing = false;
+    private Color TouchingEmission;
+    private Color TouchingColor;
+    private Color OldEmission;
+    private Color OldColor;
+
+    private bool IsOldMode = false;
     private bool IsTouching = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        Color FullColor;
+        Color HalfEmission;
+        Color DarkEmission;
         Renderer = GetComponent<MeshRenderer>();
         OriginalColor = Renderer.material.color;
         OriginalEmission = Renderer.material.GetColor("_EmissionColor");
-        NoEmission.a = 0.01f;
-        NoEmission.r = 0;
-        NoEmission.g = 0;
-        NoEmission.b = 0;
-        HighlightColor = OriginalColor;
-        HighlightColor.a = 0f;
+
+        DarkEmission.a = 0.01f;
+        DarkEmission.r = 0;
+        DarkEmission.g = 0;
+        DarkEmission.b = 0;
+        FullColor = OriginalColor;
+        FullColor.a = 0f;
+        HalfEmission = OriginalEmission;
+        HalfEmission.a = 0.1f;
+        HalfEmission.r = OriginalEmission.r / 2.0f;
+        HalfEmission.g = OriginalEmission.g / 2.0f;
+        HalfEmission.b = OriginalEmission.b / 2.0f;
+
+        TouchingEmission = HalfEmission;
+        TouchingColor = FullColor;
+
+        OldEmission = DarkEmission;
+        OldColor = FullColor;
     }
 
     // Update is called once per frame
@@ -35,22 +54,17 @@ public class TouchPoint : MonoBehaviour
         {
             IsTouching = ((Toucher.position - transform.position).magnitude < GoalDistance) ;
 
-            if (IsPreviewing)
+            if (IsOldMode)
             {
-                Color PreviewEmission = OriginalEmission;
-                PreviewEmission.a = 0.1f;
-                PreviewEmission.r = OriginalEmission.r / 2.0f;
-                PreviewEmission.g = OriginalEmission.g / 2.0f;
-                PreviewEmission.b = OriginalEmission.b / 2.0f;
-                Renderer.material.SetColor("_EmissionColor", PreviewEmission);
-                Renderer.material.color = OriginalColor;
+                Renderer.material.SetColor("_EmissionColor", OldEmission);
+                Renderer.material.color = OldColor;
             }
             else
             { 
                 if (IsTouching)
                 {
-                    Renderer.material.SetColor("_EmissionColor", NoEmission);
-                    Renderer.material.color = HighlightColor;
+                    Renderer.material.SetColor("_EmissionColor", TouchingEmission);
+                    Renderer.material.color = TouchingColor;
                 }
                 else
                 {
@@ -61,9 +75,9 @@ public class TouchPoint : MonoBehaviour
         }
     }
 
-    public void SetPreviewMode(bool IsPreview)
+    public void SetOldMode(bool IsOld)
     {
-        IsPreviewing = IsPreview;
+        IsOldMode = IsOld;
     }
 
     public bool IsTouched()
